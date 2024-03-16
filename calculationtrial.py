@@ -31,7 +31,7 @@ roll_est = []
 yaw_est = []
 
 # Initialize initial quaternion
-'''Here we created an identity quaternion.'''
+'''Here we created an identity quaternion'''
 q = np.array([1.0, 0.0, 0.0, 0.0])  
 
 # Run the filter
@@ -43,6 +43,7 @@ for i in range(len(time)):
     yaw_est.append(yaw)
 
 # Plot the estimated pitch, roll, and yaw
+'''This helps to disploy all data in a single plot'''
 plt.figure(figsize=(10, 6))
 plt.plot(time, pitch_est, label='Estimated Pitch')
 plt.plot(time, roll_est, label='Estimated Roll')
