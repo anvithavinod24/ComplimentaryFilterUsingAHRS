@@ -10,16 +10,19 @@ accel_df = pd.read_csv("Linear Accelerometer.csv")
 mag_df = pd.read_csv("Magnetometer.csv")
 
 # Merge dataframes based on time
+'''As the time column is common for all 3 csv files, we can just merge the data keeping time column as the primary column'''
 merged_df = pd.merge(gyro_df, accel_df, on="Time (s)")
 merged_df = pd.merge(merged_df, mag_df, on="Time (s)")
 
 # Extract necessary columns
+'''In order to do calculation, we needs to extract data from the merged dataframe'''
 time = merged_df["Time (s)"].values
 gyro = merged_df[["X (rad/s)", "Y (rad/s)", "Z (rad/s)"]].values
 accel = merged_df[["X (m/s^2)", "Y (m/s^2)", "Z (m/s^2)"]].values
 mag = merged_df[["X (µT)", "Y (µT)", "Z (µT)"]].values
 
 # Initialize the Complementary filter
+'''We created an instance of the complimentary filter from the AHRS Library'''
 cf = Complementary()
 
 # Initialize lists to store estimated pitch, roll, and yaw
@@ -28,7 +31,8 @@ roll_est = []
 yaw_est = []
 
 # Initialize initial quaternion
-q = np.array([1.0, 0.0, 0.0, 0.0])  # Identity quaternion
+'''Here we created an identity quaternion'''
+q = np.array([1.0, 0.0, 0.0, 0.0])  
 
 # Run the filter
 for i in range(len(time)):
