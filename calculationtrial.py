@@ -31,7 +31,7 @@ roll_est = []
 yaw_est = []
 
 # Initialize initial quaternion
-'''Here we created an identity quaternion'''
+'''Here we created an identity quaternion.'''
 q = np.array([1.0, 0.0, 0.0, 0.0])  
 
 # Run the filter
