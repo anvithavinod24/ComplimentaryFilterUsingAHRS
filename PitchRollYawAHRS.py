@@ -48,7 +48,7 @@ pitch_deg = [math.degrees(angle) for angle in pitch_est]
 roll_deg = [math.degrees(angle) for angle in roll_est]
 yaw_deg = [math.degrees(angle) for angle in yaw_est]
 
-# Create subplots for radians and degrees
+# Create subplots for radians and degrees.
 fig, axs = plt.subplots(2, 1, figsize=(10,8))
 
 axs[0].plot(time,pitch_est,label='Estimated Pitch (rad)')
