@@ -3,6 +3,7 @@ from ahrs.filters import Complementary
 import matplotlib.pyplot as plt
 import numpy as np
 from ahrs.common.orientation import q2euler
+import math
 
 # Load data from CSV files
 gyro_df = pd.read_csv("Gyroscope.csv")
@@ -42,15 +43,32 @@ for i in range(len(time)):
     roll_est.append(roll)
     yaw_est.append(yaw)
 
-# Plot the estimated pitch, roll, and yaw
-'''This helps to disploy all data in a single plot'''
-plt.figure(figsize=(10, 6))
-plt.plot(time, pitch_est, label='Estimated Pitch')
-plt.plot(time, roll_est, label='Estimated Roll')
-plt.plot(time, yaw_est, label='Estimated Yaw')
-plt.xlabel('Time (s)')
-plt.ylabel('Angle (rad)')
-plt.title('Estimated Attitude')
-plt.legend()
-plt.grid(True)
+# Convert angles from radians to degrees 
+pitch_deg = [math.degrees(angle) for angle in pitch_est]
+roll_deg = [math.degrees(angle) for angle in roll_est]
+yaw_deg = [math.degrees(angle) for angle in yaw_est]
+
+# Create subplots for radians and degrees
+fig, axs = plt.subplots(2, 1, figsize=(10,8))
+
+axs[0].plot(time,pitch_est,label='Estimated Pitch (rad)')
+axs[0].plot(time,roll_est,label='Estimated Roll (rad)')
+axs[0].plot(time,yaw_est,label='Estimated Yaw (rad)')
+axs[0].set_xlabel('Time (s)')
+axs[0].set_ylabel('Angle (rad)')
+axs[0].set_title('Estimated Attitude (Radians)')
+axs[0].legend()
+axs[0].grid(True)
+
+# Plot the estimated pitch, roll, and yaw in degrees
+axs[1].plot(time,pitch_deg,label='Estimated Pitch (deg)')
+axs[1].plot(time,roll_deg,label='Estimated Roll (deg)')
+axs[1].plot(time,yaw_deg,label='Estimated Yaw (deg)')
+axs[1].set_xlabel('Time (s)')
+axs[1].set_ylabel('Angle (degrees)')
+axs[1].set_title('Estimated Attitude (Degrees)')
+axs[1].legend()
+axs[1].grid(True)
+plt.subplots_adjust(hspace=2)
+plt.tight_layout()
 plt.show()
