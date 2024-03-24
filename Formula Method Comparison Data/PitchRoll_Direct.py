@@ -28,17 +28,12 @@ roll_degFormulae = calculate_rollForm(accel_df)
 
 # Plot the pitch
 plt.plot(accel_df['Time (s)'], roll_degFormulae, label='Roll')
-plt.plot(accel_df['Time (s)'], pitch_degFormulae, label='Pitch')
+plt.plot(accel_df['Time (s)'], pitch_degFormulae, label='Pitch',linestyle='--')
 plt.xlabel('Time (s)')
 plt.ylabel('Angle (Degrees)')
 plt.title('Estimated Attitude using Accelerometer Values')
 plt.legend()
 
-# Set limits for the x-axis to zoom in
-
-
-# Annotate specific points
-
-plt.savefig('completegraph.png', dpi=300)
+plt.savefig("D:\VS Code\Complimentary Filter using AHRS\Formula Method Comparison Data"+'sectiongraph.png', dpi=300)
 plt.show()
 
